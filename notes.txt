@@ -1,0 +1,131 @@
+BASEMAPS
+https://leaflet-extras.github.io/leaflet-providers/preview/
+
+COUNTRIES GEOJSON
+https://geojson-maps.ash.ms/
+
+COORDENADAS ON MOUSE MOVE
+map.on('mousemove', (event) => console.log('latlng', event.latlng));
+
+GRADIENT BORDER NOISE E BOX SHADOW GENERATOR
+https://www.cssmatic.com/box-shadow
+
+HABILITAR / DESABILITAR INTERAÇÕES NO MAPA
+function mapInteraction() {
+	map.touchZoom._enabled ? map.touchZoom.disable() : map.touchZoom.enable();
+	map.doubleClickZoom._enabled ? map.doubleClickZoom.disable() : map.doubleClickZoom.enable();
+	map.scrollWheelZoom._enabled ? map.scrollWheelZoom.disable() : map.scrollWheelZoom.enable();
+	map.boxZoom._enabled ? map.boxZoom.disable() : map.boxZoom.enable();
+	map.keyboard._enabled ? map.keyboard.disable() : map.keyboard.enable();
+	map.dragging._enabled ? map.dragging.disable() : map.dragging.enable();
+}
+mapInteraction();
+
+POPUP EM TODAS AS FEIÇÕES
+const countries = L.geoJSON(data, {
+  onEachFeature: ({ properties }, layer) =>
+    layer.bindPopup(`< class="custom-popup">${properties['name']}</>`),
+  style: () => ({ color: '#fff' }),
+}).addTo(map);
+
+TIPS
+<div id="tip" class="box-shadow noselect">
+  <h3>Dicas:</h3>
+  <ul>
+  </ul>
+</div>
+
+#tip {
+	z-index: 400;
+	position: absolute;
+	bottom: 50px;
+	left: 50px;
+	height: 250px;
+	width: 400px;
+	background-color: #fff;
+	color: #3a3a3a;
+	display: flex;
+	flex-direction: column;
+	border-radius: 10px;
+	padding: 20px;
+	visibility: hidden;
+	opacity: 0;
+	transition: opacity 1s, visibility 1s;
+}
+
+#tip h3 {
+	font-size: 1.2em;
+	padding-bottom: 15px;
+	font-weight: bold;
+}
+
+#tip ul {
+	font-size: 1.1em;
+	list-style-type: none;
+	overflow: auto;
+}
+
+#tip ul li {
+	padding-bottom: 10px;
+}
+
+#tip ul li:last-child {
+	padding-bottom: 0px;
+}
+
+const tip = document.getElementById('tip');
+const tip_ul = tip.querySelector('ul');
+
+startGame()
+tip.classList.add('show');
+tip_ul.innerHTML = '';
+
+RANDOM
+const random = (number) => Math.floor(Math.random() * number);
+
+STYLE
+const createStyle = (color) => ({
+  stroke: false,
+  fill: true,
+  fillColor: color,
+  fillOpacity: 0.5,
+});
+
+SET BOUND ZOOM CENTER
+map.fitBounds(temp_bounds);
+map.setZoom(3);
+map.panTo(temp_center);
+
+GET FEATURE CENTER
+const center = temp_feature.getBounds().getCenter();
+
+API DO IBGE
+https://servicodados.ibge.gov.br/api/docs/localidades#api-UFs-estadosGet
+
+COM BASE MAP
+const map = L.map('map', {
+  center: [-12.6, -50.2],
+  zoom: 4,
+  zoomControl: false,
+  layers: [
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png', {
+      attribution:
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+      subdomains: 'abcd',
+      maxZoom: 8,
+      minZoom: 4,
+    }),
+  ],
+});
+
+POPUP
+const state_name = temp_layer.feature.properties['NM_ESTADO'];
+const popup = L.popup();
+popup
+  .setLatLng(temp_feature.getBounds().getNorthEast())
+  .setContent(`<h1 class="custom-popup">${state_name}</h1>`)
+  .openOn(map);
+
+SET MAP EXTENT
+const temp_bounds = temp_feature.getBounds();
+map.fitBounds(temp_bounds, { maxZoom: 5 });

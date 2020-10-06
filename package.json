@@ -1,0 +1,35 @@
+{
+	"name": "genius",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"dev": "webpack-dev-server --https --mode=development",
+		"build": "webpack --mode=production",
+		"deploy": "gh-pages -d dist"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"homepage": "https://diegogeodev.github.io/map_genius",
+	"devDependencies": {
+		"@babel/cli": "^7.8.4",
+		"@babel/core": "^7.9.0",
+		"@babel/plugin-transform-async-to-generator": "^7.8.3",
+		"@babel/polyfill": "^7.8.7",
+		"@babel/preset-env": "^7.9.5",
+		"babel-loader": "^8.1.0",
+		"css-loader": "^3.5.3",
+		"file-loader": "^6.0.0",
+		"json-loader": "^0.5.7",
+		"style-loader": "^1.2.0",
+		"url-loader": "^4.1.0",
+		"webpack": "^4.43.0",
+		"webpack-cli": "^3.3.11",
+		"webpack-dev-server": "^3.11.0"
+	},
+	"dependencies": {
+		"gh-pages": "^3.1.0",
+		"leaflet": "^1.7.1"
+	}
+}
